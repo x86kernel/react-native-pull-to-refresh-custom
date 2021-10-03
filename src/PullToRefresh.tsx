@@ -168,6 +168,8 @@ export default class PullToRefresh extends Component<Props, State> {
         if (gestureState.dy >= 0) {
             if(!this.props.maxTriggerHeight || (gestureState.dy < this.props.maxTriggerHeight)) {
                 this.state.containerTop.setValue(gestureState.dy);
+            } else {
+                this.state.containerTop.setValue(this.props.maxTriggerHeight);
             }
             // const dy = Math.max(0, gestureState.dy);
         } else {
