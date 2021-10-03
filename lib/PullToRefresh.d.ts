@@ -19,6 +19,7 @@ export interface Props {
     onRefresh: () => void;
     children: JSX.Element;
     topPullThreshold: number;
+    maxTriggerHeight?: number;
 }
 interface State {
     containerTop: Animated.Value;

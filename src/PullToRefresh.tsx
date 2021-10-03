@@ -45,6 +45,7 @@ export interface Props {
     children: JSX.Element;
     // 内部滚动组件，contentOffset.y <= topPullThreshold 时，触发顶部的下拉刷新动作
     topPullThreshold: number;
+    maxTriggerHeight?: number;
 }
 
 interface State {
@@ -165,8 +166,10 @@ export default class PullToRefresh extends Component<Props, State> {
 
     onPanResponderMove(event: GestureResponderEvent, gestureState: PanResponderGestureState) {
         if (gestureState.dy >= 0) {
+            if(!this.props.maxTriggerHeight || (gestureState.dy < this.props.maxTriggerHeight)) {
+                this.state.containerTop.setValue(gestureState.dy);
+            }
             // const dy = Math.max(0, gestureState.dy);
-            this.state.containerTop.setValue(gestureState.dy);
         } else {
             this.state.containerTop.setValue(0);
             if (this.scrollRef) {
